@@ -1,0 +1,23 @@
+<form class="search-form">
+  <mat-form-field class="autocomplete-form">
+    <mat-label>Search for a city</mat-label>
+    <input
+      #searchBox
+      type="text"
+      matInput
+      [matAutocomplete]="auto"
+      (input)="search(searchBox.value)"
+      class="autocomplete-form"
+    />
+    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+      @for (option of cities$ | async; track option) {
+      <mat-option
+        [value]="option.name"
+        (onSelectionChange)="citySelected(option.id + '')"
+      >
+        {{ option.name }} - {{ option.country }}</mat-option
+      >
+      }
+    </mat-autocomplete>
+  </mat-form-field>
+</form>
